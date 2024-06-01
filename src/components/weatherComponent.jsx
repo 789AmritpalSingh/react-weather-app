@@ -292,7 +292,7 @@ const Weather = () => {
               style={{ width: "100%" }}
             />
             <Typography variant="h6">
-              To view weather information, please enable location access.
+              Loading the weather information...
             </Typography>
 
             {isLocationBlocked && (
