@@ -9,7 +9,7 @@ const WeatherElementBox = ({ icon: IconComponent, label, value }) => (
         p: 2,
         gap: 1,
         backgroundColor: "rgba(0, 0, 0, 0.7)",
-        borderRadius: "4px",
+        borderRadius: "16px",
         boxShadow: 1,
       }}
     >

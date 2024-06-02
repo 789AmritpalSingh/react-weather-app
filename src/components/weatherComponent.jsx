@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import ErrorIcon from "@mui/icons-material/Error"; // Importing ErrorIcon
-import weatherIconGIF from "./images/WeatherIcons.gif"; // Importing the forecast image
 import {
   Alert,
   Autocomplete,
@@ -17,7 +16,6 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import backgroundImage from "./images/background.jpg";
 import DigitalClock from "./digitalClock";
 import ThermostatAutoIcon from "@mui/icons-material/ThermostatAuto"; // For Feels like temperature
 import ThermostatIcon from "@mui/icons-material/Thermostat"; // For Min Temperature
@@ -54,6 +52,8 @@ const Weather = () => {
   const [isLocationAllowed, setIsLocationAllowed] = useState(false); // Hook to store if user allowed location access or not
   const [isLocationBlocked, setIsLocationBlocked] = useState(false); // Hook to manage the status of the location blocking.
   const isMobile = useMediaQuery('(max-width:800px)'); //  for mobile screens
+  const weatherIconGIF = process.env.PUBLIC_URL + '/images/WeatherIcons.gif'; // Importing the forecase image for the intial page loading
+  const backgroundImage = process.env.PUBLIC_URL + '/images/background.jpg'
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyAOCA-NU2T7UXdvE3rImCaN63P_vRGr368",
@@ -207,7 +207,7 @@ const Weather = () => {
   // The rendering part of the Weather component
   return (
     <div
-      style={{
+      style={{ // For setting the background image for the whole page
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
@@ -215,7 +215,7 @@ const Weather = () => {
         minHeight: "100vh",
       }}
     >
-      <Snackbar
+      <Snackbar // Snackbar alert message if the weather details are not found for entered location.
         open={snackbarOpen}
         autoHideDuration={6000}
         onClose={() => {
@@ -229,10 +229,10 @@ const Weather = () => {
           }}
           severity="error"
           sx={{
-            width: "100%",
+            width: isMobile ? "60%" : "100%",
             backgroundColor: "red",
             color: "white",
-            fontSize: "1.2rem",
+            fontSize: isMobile ? "1rem" : "1.2rem",
           }}
           iconMapping={{
             error: <ErrorIcon style={{ color: "white", fontSize: "2rem" }} />, // Customizing the error icon color
@@ -240,8 +240,8 @@ const Weather = () => {
         >
           {snackbarMessage}
         </Alert>
-      </Snackbar>
-      <Snackbar
+      </Snackbar> 
+      <Snackbar // Snackbar for alert message if the user has not entered anything in the search bar and try searching.
         open={snackbarOpen1}
         autoHideDuration={6000}
         onClose={() => {
@@ -255,10 +255,10 @@ const Weather = () => {
           }}
           severity="error"
           sx={{
-            width: "100%",
+            width: isMobile ? "60%" : "100%",
             backgroundColor: "red",
             color: "white",
-            fontSize: "1.2rem",
+            fontSize: isMobile ? "1rem" : "1.2rem",
           }}
           iconMapping={{
             error: <ErrorIcon style={{ color: "white", fontSize: "2rem" }} />, // Customizing the error icon color
@@ -267,7 +267,7 @@ const Weather = () => {
           {snackbarMessage1}
         </Alert>
       </Snackbar>
-      {!isLocationAllowed && (
+      {!isLocationAllowed && ( // When the user has not allowed the location yet.
         <Box
           sx={{
             position: "absolute",
@@ -295,7 +295,7 @@ const Weather = () => {
               Loading the weather information...
             </Typography>
 
-            {isLocationBlocked && (
+            {isLocationBlocked && ( // when the user blocks the location access.
               <Typography variant="h6" sx={{ mt: 2 }}>
                 Location access is currently blocked. Please enable location
                 access in your browser settings and reload the page to view
@@ -305,7 +305,7 @@ const Weather = () => {
           </Paper>
         </Box>
       )}
-      {isLocationAllowed && (
+      {isLocationAllowed && ( // when the user allows the location.
         <Box
           display="flex"
           justifyContent="center"
@@ -313,10 +313,10 @@ const Weather = () => {
           minHeight="100vh"
           flexDirection="column"
         >
-          <Container maxWidth="lg">
+          <Container maxWidth="lg"> 
             <Grid container spacing={2} direction={isMobile ? "column" : "row"}>
               <Grid item xs={12} md={6}>
-                <Card
+                <Card // Left card component displaying cty, country, time, temperature and a background image
                   sx={{
                     opacity: 1,
                     padding: isMobile ? "10px" : "20px",
@@ -467,6 +467,7 @@ const Weather = () => {
                                   fontSize: "1rem",
                                   color: "white",
                                   backgroundColor: "black",
+                                  borderRadius: "20px", // Increase the border radius
                                 },
                                 endAdornment: (
                                   <InputAdornment position="end">
