@@ -11,3 +11,4 @@ const directions = [
 ];
 return directions[Math.floor((degrees + 11.25) / 22.5) % 16];
 };
+
