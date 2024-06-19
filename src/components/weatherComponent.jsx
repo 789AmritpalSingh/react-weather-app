@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Container,
-  Grid,
-} from "@mui/material";
+import {Box, Container, Grid} from "@mui/material";
 import SnackbarAlert from "./SnackbarAlert";
 import LeftWeatherCard from "./LeftWeatherCard";
 import WeatherDetails from "./WeatherDetails";
