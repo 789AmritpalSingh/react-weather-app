@@ -17,6 +17,13 @@ export const fetchWeatherDataByCoords = async (lat, lon) => {
     return await response.json();
 };
 
+export const fetchFiveDayThreeHourForecastWeatherDataByCoords = async (lat, lon) => {
+    // Fetching five day 3 hour forecast weather day by longitude and latitude.
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+    const response = await fetch(forecastUrl);
+    return await response.json();
+}
+
 export const fetchLocations = async (input) => {
     return new Promise((resolve, reject) => {
         // Check if the input length is greater than 1 and if the Google Maps Places library is available

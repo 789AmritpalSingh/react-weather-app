@@ -57,7 +57,7 @@ const NavigationBar = () => {
           >
             {/* Tabs for navigation */}
             <Tab label="Current Weather" component={Link} to="/" />
-            <Tab label="4 Day Hourly Forecast" component={Link} to="/fourDayHourlyForecast" />
+            <Tab label="5 Day 3 Hour Forecast" component={Link} to="/fiveDayThreeHourForecast" />
           </Tabs>
         </Box>
       </Toolbar>

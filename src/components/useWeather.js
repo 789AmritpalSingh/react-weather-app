@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useMediaQuery } from "@mui/material";
-import { fetchCoordsByCity, fetchLocations, fetchWeatherDataByCoords } from "./api";
+import { fetchCoordsByCity, fetchFiveDayThreeHourForecastWeatherDataByCoords, fetchLocations, fetchWeatherDataByCoords } from "./api";
 import { useJsApiLoader } from "@react-google-maps/api";
 import backgroundWeatherImages from "./backgroundWeatherImages";
 
@@ -8,7 +8,8 @@ const libraries = ["places"];
 
 // Component containing all the functionalities
 const useWeather = () => {
-    const [parsedWeatherData, setParsedWeatherData] = useState(null);
+    const [parsedWeatherData, setParsedWeatherData] = useState(null); // for handling current weather data
+    const [forecastWeatherData, setForecastWeatherData] = useState(null); // for handling 5 day 3 hour forecast weather data.
     const [location, setLocation] = useState("");
     const [options, setOptions] = useState([]);
     const autocompleteServiceRef = useRef(null); // Ref to store autocomplete service instance
@@ -40,6 +41,13 @@ const useWeather = () => {
           );
           console.log("Data", data);
           setParsedWeatherData(data);
+
+          const forecastData = await fetchFiveDayThreeHourForecastWeatherDataByCoords(
+            position.coords.latitude,
+            position.coords.longitude
+          )
+          console.log('forecast data ', forecastData)
+          setForecastWeatherData(forecastData);
           setIsLocationAllowed(true); // location acess was provided
         },
         (error) => {
@@ -84,6 +92,34 @@ const useWeather = () => {
         setSnackbarOpen(true);
       }
       console.log("Setting the location as null");
+      setLocation(null); // Clearing the text field after hitting enter.
+    };
+
+    const handleForecastWeatherSearch = async (searchLocation) => { // function for handling 5 days 3 hour forecast weather data.
+      console.log("Location value in forecast weather search", searchLocation);
+      const geoData = await fetchCoordsByCity(searchLocation);
+      console.log("Geo data in forecast weather search", geoData);
+      if (geoData.length > 0) {
+        const weatherData = await fetchFiveDayThreeHourForecastWeatherDataByCoords(
+          geoData[0].lat,
+          geoData[0].lon
+        );
+        console.log("Weather forecast 5 day 3 hour data ", weatherData);
+        if (weatherData) {
+          setForecastWeatherData(weatherData);
+        } else {
+          setSnackbarMessage(
+            `Cannot find the weather details for location - ${searchLocation}`
+          );
+          setSnackbarOpen(true);
+        }
+      } else {
+        setSnackbarMessage(
+          `Cannot find the weather details for location - ${searchLocation}`
+        );
+        setSnackbarOpen(true);
+      }
+      console.log("Setting the location as null in weather forecast");
       setLocation(null); // Clearing the text field after hitting enter.
     };
   
@@ -173,10 +209,56 @@ const useWeather = () => {
         setSnackbarOpen1(true);
       }
     };
+
+    // function for the forecast weather data.
+    const handleForecastKeyDown = (event) => {
+      if (event.key === "Enter") {
+        // Now after hitting the enter key, selectedOptionRef checks if search value from the dropdown, if not from dropdown then it gets the location from location.label and if nothing is entered then searchValue is empty, then it goes to else block
+        event.preventDefault();
+        setTimeout(() => {
+          const searchValue =
+            selectedOptionRef.current && selectedOptionRef.current.label
+              ? selectedOptionRef.current.label
+              : location?.label;
+  
+          console.log(`Search value found in forecast weather search in key down- ${searchValue}`);
+          if (searchValue) {
+            handleForecastWeatherSearch(searchValue);
+          } else {
+            console.log("Please enter something to search weather data for.");
+            setSnackbarMessage1(
+              `Please enter something to search weather data for`
+            );
+            setSnackbarOpen1(true);
+          }
+        }, 100); // Short delay to allow selection to register
+      }
+    };
+  
+    // function for the forecast weather data.
+    const handleForecastSubmit = (event) => {
+      // function for handling the search in the phone, because in phone users can't press enter, so pressing search icon will trigger search
+      console.log("Handle submit called.");
+      event.preventDefault(); // preventing form from submitting
+      const searchValue =
+        selectedOptionRef.current && selectedOptionRef.current.label
+          ? selectedOptionRef.current.label
+          : location?.label;
+  
+      console.log(`Search value found in forecast weather search in handle submit- ${searchValue}`);
+      if (searchValue) {
+        handleForecastWeatherSearch(searchValue);
+      } else {
+        console.log("Please enter something to search weather data for.");
+        setSnackbarMessage1(`Please enter something to search weather data for`);
+        setSnackbarOpen1(true);
+      }
+    };
   
 
   return {
     parsedWeatherData,
+    forecastWeatherData,
     options,
     isLocationAllowed,
     isLocationBlocked,
@@ -191,8 +273,11 @@ const useWeather = () => {
     setSnackbarOpen1,
     handleInputChange,
     handleOptionsChange,
+    handleForecastWeatherSearch,
     handleKeyDown,
     handleSubmit,
+    handleForecastKeyDown,
+    handleForecastSubmit,
     setBackgroundImage,
   };
 };

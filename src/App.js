@@ -3,8 +3,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Weather from "./components/weatherComponent";
 import NavigationBar from "./components/NavigationBar";
-import FourDayHourlyForecast from "./components/FourDayHourlyForecast";
 import useWeather from "./components/useWeather";
+import FiveDayThreeHourForecast from "./components/FiveDayThreeHourForecast";
 
 const App = () => {
   const {
@@ -36,7 +36,7 @@ const App = () => {
         {isLocationAllowed && <NavigationBar />} {/* Only displaying the navigation bar if the user has allowed the location. */}
         <Routes>
           <Route path="/" element={<Weather />} />
-          <Route path="/fourDayHourlyForecast" element={<FourDayHourlyForecast />} />
+          <Route path="/fiveDayThreeHourForecast" element={<FiveDayThreeHourForecast />} />
         </Routes>
       </Router>
     </>
