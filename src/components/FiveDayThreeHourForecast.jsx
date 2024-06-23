@@ -12,6 +12,7 @@ const FiveDayThreeHourForecast = () => {
     forecastWeatherData,
     options,
     isMobile,
+    forecastBackgroundImage,
     setSnackbarOpen,
     setSnackbarOpen1,
     handleForecastSubmit,
@@ -41,6 +42,7 @@ const FiveDayThreeHourForecast = () => {
         handleForecastKeyDown={handleForecastKeyDown}
         handleInputChange={handleInputChange}
         handleOptionsChange={handleOptionsChange}
+        forecastBackgroundImage={forecastBackgroundImage}
       />
     </>
   );

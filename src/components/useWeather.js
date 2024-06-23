@@ -25,6 +25,7 @@ const useWeather = () => {
     const isMobile = useMediaQuery("(max-width:800px)"); //  for mobile screens
     const weatherIconGIF = process.env.PUBLIC_URL + "/images/WeatherIcons.gif"; // Importing the forecase image for the intial page loading
     const backgroundImage = process.env.PUBLIC_URL + "/images/background.jpg";
+    const forecastBackgroundImage = process.env.PUBLIC_URL + "/images/clear.jpg";
   
     const { isLoaded } = useJsApiLoader({
       googleMapsApiKey: "AIzaSyAOCA-NU2T7UXdvE3rImCaN63P_vRGr368",
@@ -265,6 +266,7 @@ const useWeather = () => {
     isMobile,
     weatherIconGIF,
     backgroundImage,
+    forecastBackgroundImage,
     snackbarOpen,
     snackbarMessage,
     snackbarOpen1,
