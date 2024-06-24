@@ -12,13 +12,13 @@ const FiveDayThreeHourForecast = () => {
     forecastWeatherData,
     options,
     isMobile,
-    forecastBackgroundImage,
     setSnackbarOpen,
     setSnackbarOpen1,
     handleForecastSubmit,
     handleForecastKeyDown,
     handleInputChange,
     handleOptionsChange,
+    setForecastBackgroundImage
   } = useWeather();
 
   return (
@@ -42,7 +42,7 @@ const FiveDayThreeHourForecast = () => {
         handleForecastKeyDown={handleForecastKeyDown}
         handleInputChange={handleInputChange}
         handleOptionsChange={handleOptionsChange}
-        forecastBackgroundImage={forecastBackgroundImage}
+        forecastBackgroundImage={setForecastBackgroundImage()}
       />
     </>
   );

@@ -131,6 +131,14 @@ const useWeather = () => {
         backgroundWeatherImages[condition] || backgroundWeatherImages["Clear"]
       ); // If the type of weather not found then setting Clear weather background image
     };
+
+    const setForecastBackgroundImage = () => {
+      // function to set the background image for the forecast tab according to the current weather
+      const condition = forecastWeatherData?.list[0]?.weather[0].main; // choosing the background image according to the first element in the list i.e. the current weather.
+      return (
+        backgroundWeatherImages[condition] || backgroundWeatherImages["Clear"]
+      ); // If the type of weather not found then setting Clear forecast weather background image
+    };
   
     // Function to handle the change in input, like when the user types in the search bar, it provides the matching locations
     const handleInputChange = async (event, newInputValue, reason) => {
@@ -266,7 +274,6 @@ const useWeather = () => {
     isMobile,
     weatherIconGIF,
     backgroundImage,
-    forecastBackgroundImage,
     snackbarOpen,
     snackbarMessage,
     snackbarOpen1,
@@ -281,6 +288,7 @@ const useWeather = () => {
     handleForecastKeyDown,
     handleForecastSubmit,
     setBackgroundImage,
+    setForecastBackgroundImage
   };
 };
 

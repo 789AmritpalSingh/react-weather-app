@@ -1,6 +1,7 @@
 import React from "react";
 import SearchBar from "./SearchBar";
 import { Typography, Grid, Card, CardContent } from "@mui/material";
+import WeatherIcon from "./weatherIcons";
 
 // This file contains the details of the forecast weather data i.e. 5 days 3 hour forecast
 const ForecastWeatherDetails = ({
@@ -11,7 +12,7 @@ const ForecastWeatherDetails = ({
   handleInputChange,
   handleOptionsChange,
   isMobile,
-  forecastBackgroundImage,
+  forecastBackgroundImage
 }) => {
   const formatDate = (dt) => {
     const date = new Date(dt * 1000);
@@ -39,7 +40,7 @@ const ForecastWeatherDetails = ({
         {forecastWeatherData && forecastWeatherData.city && (
           <Grid item>
             <Typography
-              variant= {isMobile ? "h3" : "h4"}
+              variant={isMobile ? "h3" : "h4"}
               gutterBottom
               style={{
                 color: "#fff",
@@ -51,7 +52,7 @@ const ForecastWeatherDetails = ({
                 margin: '10px'
               }}
             >
-              {forecastWeatherData.city.name}
+              {forecastWeatherData.city.name}, {forecastWeatherData.city.country}
             </Typography>
           </Grid>
         )}
@@ -74,28 +75,44 @@ const ForecastWeatherDetails = ({
             <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
               <Card
                 style={{
-                  backgroundColor: "#444",
+                  backgroundColor: "rgba(0, 0, 0, 0.9)",
                   color: "#fff",
                   borderRadius: 8,
                   padding: "10px",
                 }}
               >
                 <CardContent>
-                  <Typography variant="body2" style={{ color: "#bbb" }}>
-                    {formatDate(hour.dt)}
-                  </Typography>
-                  <Typography variant="h6" style={{ color: "#fff" }}>
-                    Temperature: {hour.main.temp}°C
-                  </Typography>
-                  <Typography variant="body1" style={{ color: "#eee" }}>
-                    Weather: {hour.weather[0].description}
-                  </Typography>
-                  <Typography variant="body2" style={{ color: "#bbb" }}>
-                    Wind: {hour.wind.speed} m/s
-                  </Typography>
-                  <Typography variant="body2" style={{ color: "#bbb" }}>
-                    Humidity: {hour.main.humidity}%
-                  </Typography>
+                  <Grid container justifyContent="space-between" alignItems="center">
+                    <Grid item xs={8}>
+                      <Typography variant="body2" style={{ color: "#bbb" }}>
+                        {formatDate(hour.dt)}
+                      </Typography>
+                      <Typography variant="h6" style={{ color: "#fff" }}>
+                        Temperature: {hour.main.temp}°C
+                      </Typography>
+                      <Typography variant="body1" style={{ color: "#eee" }}>
+                        Weather: {hour.weather[0].description}
+                      </Typography>
+                      <Typography variant="body2" style={{ color: "#bbb" }}>
+                        Wind: {hour.wind.speed} m/s
+                      </Typography>
+                      <Typography variant="body2" style={{ color: "#bbb" }}>
+                        Humidity: {hour.main.humidity}%
+                      </Typography>
+                      <Typography variant="body2" style={{ color: "#bbb" }}>
+                        Min Temp: {hour.main.temp_min}°C
+                      </Typography>
+                      <Typography variant="body2" style={{ color: "#bbb" }}>
+                        Max Temp: {hour.main.temp_max}°C
+                      </Typography>
+                      <Typography variant="body2" style={{ color: "#bbb" }}>
+                        Feels like: {hour.main.feels_like}°C
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <WeatherIcon type={hour.weather[0].main} />
+                    </Grid>
+                  </Grid>
                 </CardContent>
               </Card>
             </Grid>
