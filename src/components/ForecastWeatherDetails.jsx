@@ -54,7 +54,7 @@ const ForecastWeatherDetails = ({
           <Grid item>
             {/* Display city name and country */}
             <Typography
-              variant={isMobile ? "h3" : "h4"}
+              variant={isMobile ? "body1" : "h4"}
               sx={{
                 color: "#fff",
                 fontWeight: "bold",
@@ -72,7 +72,7 @@ const ForecastWeatherDetails = ({
         )}
         
         {/* Search bar for searching different locations */}
-        <Grid item xs={12} sm={6} container justifyContent="flex-end">
+        <Grid item xs={12} sm={6} md={4} lg={3} container justifyContent="flex-end">
           <SearchBar
             options={options}
             handleInputChange={handleInputChange}

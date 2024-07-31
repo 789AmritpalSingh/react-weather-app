@@ -24,6 +24,13 @@ const NavigationBar = () => {
             background: '-webkit-linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)', // Adds a gradient effect to the text
             WebkitBackgroundClip: 'text', // Clips the background to the text
             WebkitTextFillColor: 'transparent', // Makes the text color transparent to show the gradient
+            fontSize: {
+              xxs: '1.2rem', // More Smaller font size on extra-extra-small screens
+              xs: '1.2rem', // Smaller font size on extra-small screens
+              sm: '1.5rem', // Normal font size on small screens
+              md: '1.8rem', // Larger font size on medium screens
+              lg: '2rem', // Larger font size on large screens
+            },
           }}
         >
           Weather App
@@ -40,11 +47,21 @@ const NavigationBar = () => {
             }}
             sx={{
               '& .MuiTab-root': {
-                minWidth: 120, // Sets a minimum width for each tab
+                minWidth: {
+                  xxs: 60, // Minimum width for tabs on extra-extra small screens
+                  xs: 80, // Minimum width for tabs on extra-small screens
+                  sm: 100, // Minimum width for tabs on small screens
+                  md: 120, // Minimum width for tabs on medium screens
+                },
                 color: '#fff', // Sets the text color of the tabs
                 textTransform: 'none', // Disables text transformation (e.g., uppercase)
                 fontWeight: 'bold', // Makes the tab text bold
-                fontSize: '1rem', // Sets the font size of the tab text
+                fontSize: {
+                  xxs: '0.7rem', 
+                  xs: '0.8rem', // Smaller font size on extra-small screens
+                  sm: '0.9rem', // Normal font size on small screens
+                  md: '1rem', // Larger font size on medium screens
+                },
                 transition: 'background-color 0.3s', // Adds a transition effect for background color changes
               },
               '& .MuiTab-root.Mui-selected': {
@@ -57,7 +74,7 @@ const NavigationBar = () => {
           >
             {/* Tabs for navigation */}
             <Tab label="Current Weather" component={Link} to="/" />
-            <Tab label="5 Day 3 Hour Forecast" component={Link} to="/fiveDayThreeHourForecast" />
+            <Tab label="5 Day Forecast" component={Link} to="/fiveDayThreeHourForecast" />
           </Tabs>
         </Box>
       </Toolbar>
