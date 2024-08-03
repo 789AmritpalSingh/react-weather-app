@@ -1,10 +1,11 @@
 import React from "react";
-import {Box, Container, Grid} from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import SnackbarAlert from "./SnackbarAlert";
 import LeftWeatherCard from "./LeftWeatherCard";
 import WeatherDetails from "./WeatherDetails";
 import LocationPrompt from "./LocationPrompt";
 import useWeather from "./useWeather";
+import SearchBar from "./SearchBar";
 
 // Main component responsible for rendering the weather app ui
 const Weather = () => {
@@ -39,6 +40,7 @@ const Weather = () => {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
         minHeight: "100vh",
+        overflow: "hidden", // Prevent outer scrolling
       }}
     >
       <SnackbarAlert // Snackbar alert message if the weather details are not found for entered location.
@@ -67,6 +69,25 @@ const Weather = () => {
           minHeight="100vh"
           flexDirection="column"
         >
+          {isMobile && (
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
+                mt: 2,
+              }}
+            >
+              <SearchBar
+                options={options}
+                handleInputChange={handleInputChange}
+                handleOptionsChange={handleOptionsChange}
+                handleKeyDown={handleKeyDown}
+                handleSubmit={handleSubmit}
+                isMobile={isMobile}
+              />
+            </Box>
+          )}
           <Container maxWidth="lg">
             <Grid container spacing={2} direction={isMobile ? "column" : "row"}>
               <Grid item xs={12} md={6}>

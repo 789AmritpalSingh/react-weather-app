@@ -14,7 +14,6 @@ const LeftWeatherCard = ({ parsedWeatherData, isMobile, backgroundImage }) => (
       backgroundSize: "cover",
       backgroundPosition: "center",
       height: isMobile ? "auto" : "88vh", // Ensure both cards have the same height
-      mb: isMobile ? 1 : 0,
       flex: isMobile ? 1 : "none", // Ensure it takes up equal height in mobile view
     }}
   >

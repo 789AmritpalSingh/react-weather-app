@@ -17,11 +17,18 @@ const WeatherDetails = ({ parsedWeatherData, isMobile, options, handleInputChang
     sx={{
       opacity: 0.9,
       padding: "20px",
-      mt: 3,
-      mb: 3,
+      mt: isMobile ? 0 : 3,
+      mb: isMobile ? 0 : 3,
       background: "#333",
-      height: isMobile ? "auto" : "88vh",
+      height: "88vh",
       overflowY: isMobile ? "scroll" : "auto", // Ensure scrolling on mobile view
+      // // Hide scrollbar for Chrome, Safari and Opera
+      // '&::-webkit-scrollbar': {
+      //   display: 'none',
+      // },
+      // // Hide scrollbar for IE, Edge and Firefox
+      // '-ms-overflow-style': 'none',  // IE and Edge
+      // 'scrollbar-width': 'none',  // Firefox
     }}
   >
     <CardContent
@@ -43,13 +50,14 @@ const WeatherDetails = ({ parsedWeatherData, isMobile, options, handleInputChang
             borderRadius: "12px", // Rounded corners for the box
           }}
         >
-          <WeatherIcon type={parsedWeatherData.weather[0].main} />
+          <WeatherIcon type={parsedWeatherData.weather[0].main} 
+          isMobile={isMobile}/>
           <Typography
             variant="body3"
             sx={{
               color: "white",
               ml: 2,
-              fontSize: "2rem",
+              fontSize: isMobile ? "1rem" : "1.5rem",
               justifyContent: "center",
               alignItems: "center",
             }}
@@ -58,6 +66,7 @@ const WeatherDetails = ({ parsedWeatherData, isMobile, options, handleInputChang
           </Typography>
         </Box>
       )}
+      {!isMobile && 
       <Grid item xs={12}>
         <Box
           sx={{
@@ -78,82 +87,92 @@ const WeatherDetails = ({ parsedWeatherData, isMobile, options, handleInputChang
             isMobile={isMobile}
           />
         </Box>
-      </Grid>
+      </Grid>}
 
       {parsedWeatherData && (
-        <Grid container spacing={2} sx={{ mt: 1 }}>
-          <Grid item xs={12} sm={6} md={6}>
+        <Grid container spacing={2} sx={{ mt: isMobile ? 0 : 1 }}>
+          <Grid item xs={6} sm={6} md={6}>
             <WeatherElementBox
               icon={ThermostatAutoIcon}
               label="Feels like"
               value={`${parsedWeatherData.main.feels_like}°C`}
+              isMobile={isMobile}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+          <Grid item xs={6} sm={6} md={6}>
             <WeatherElementBox
               icon={Compress}
               label="Pressure"
               value={`${parsedWeatherData.main.pressure} hpa`}
+              isMobile={isMobile}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+          <Grid item xs={6} sm={6} md={6}>
             <WeatherElementBox
               icon={() => (
-                <ThermostatIcon sx={{ color: "skyblue", fontSize: "3rem" }} />
+                <ThermostatIcon sx={{ color: "skyblue", fontSize: isMobile ? "2rem" : "3rem" }} />
               )}
               label="Min Temp"
               value={`${parsedWeatherData.main.temp_min}°C`}
+              isMobile={isMobile}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+          <Grid item xs={6} sm={6} md={6}>
             <WeatherElementBox
               icon={() => (
-                <ThermostatIcon sx={{ color: "red", fontSize: "3rem" }} />
+                <ThermostatIcon sx={{ color: "red", fontSize: isMobile ? "2rem" : "3rem" }} />
               )}
               label="Max Temp"
               value={`${parsedWeatherData.main.temp_max}°C`}
+              isMobile={isMobile}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+          <Grid item xs={6} sm={6} md={6}>
             <WeatherElementBox
               icon={WaterDropIcon}
               label="Humidity"
               value={`${parsedWeatherData.main.humidity}%`}
+              isMobile={isMobile}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+          <Grid item xs={6} sm={6} md={6}>
             <WeatherElementBox
               icon={WindPowerIcon}
               label="Wind Speed"
               value={`${(parsedWeatherData.wind.speed * 3.6).toFixed()} km/h`}
+              isMobile={isMobile}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+          <Grid item xs={6} sm={6} md={6}>
             <WeatherElementBox
               icon={Loop}
               label="Wind Direction"
               value={`${convertDegreesToCompass(parsedWeatherData.wind.deg)}`}
+              isMobile={isMobile}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+          <Grid item xs={6} sm={6} md={6}>
             <WeatherElementBox
               icon={VisibilityIcon}
               label="Visibility"
               value={`${parsedWeatherData.visibility}m`}
+              isMobile={isMobile}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={6}>
+          <Grid item xs={6} sm={6} md={6}>
             <WeatherElementBox
               icon={Brightness7}
               label="Sunrise"
               value={`${formatTime(parsedWeatherData.sys.sunrise)}`}
+              isMobile={isMobile}
             />
           </Grid>
-          <Grid item xs={12} sm={6} md={6} sx={{ mb: 3 }}>
+          <Grid item xs={6} sm={6} md={6} sx={{ mb: 3 }}>
             <WeatherElementBox
               icon={WbTwilight}
               label="Sunset"
               value={`${formatTime(parsedWeatherData.sys.sunset)}`}
+              isMobile={isMobile}
             />
           </Grid>
         </Grid>

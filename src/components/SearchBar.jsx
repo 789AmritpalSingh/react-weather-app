@@ -67,7 +67,7 @@ const SearchBar = ({
       />
     )}
     sx={{
-      width: isMobile ? "70%" : "90%",
+      width: isMobile ? "80%" : "90%",
       margin: "0 auto",
     }}
   />
