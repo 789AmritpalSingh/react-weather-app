@@ -40,7 +40,7 @@ const Weather = () => {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
         minHeight: "100vh",
-        overflow: "hidden", // Prevent outer scrolling
+        // overflow: "hidden", // Prevent outer scrolling
       }}
     >
       <SnackbarAlert // Snackbar alert message if the weather details are not found for entered location.

@@ -18,9 +18,9 @@ const WeatherDetails = ({ parsedWeatherData, isMobile, options, handleInputChang
       opacity: 0.9,
       padding: "20px",
       mt: isMobile ? 0 : 3,
-      mb: isMobile ? 0 : 3,
+      mb: 3,
       background: "#333",
-      height: "88vh",
+      height: "44vh",
       overflowY: isMobile ? "scroll" : "auto", // Ensure scrolling on mobile view
       // // Hide scrollbar for Chrome, Safari and Opera
       // '&::-webkit-scrollbar': {
@@ -114,7 +114,6 @@ const WeatherDetails = ({ parsedWeatherData, isMobile, options, handleInputChang
               )}
               label="Min Temp"
               value={`${parsedWeatherData.main.temp_min}°C`}
-              isMobile={isMobile}
             />
           </Grid>
           <Grid item xs={6} sm={6} md={6}>
@@ -124,7 +123,6 @@ const WeatherDetails = ({ parsedWeatherData, isMobile, options, handleInputChang
               )}
               label="Max Temp"
               value={`${parsedWeatherData.main.temp_max}°C`}
-              isMobile={isMobile}
             />
           </Grid>
           <Grid item xs={6} sm={6} md={6}>
