@@ -20,7 +20,7 @@ const WeatherDetails = ({ parsedWeatherData, isMobile, options, handleInputChang
       mt: isMobile ? 0 : 3,
       mb: 3,
       background: "#333",
-      height: "44vh",
+      height: isMobile ? "44vh" : "88vh",
       overflowY: isMobile ? "scroll" : "auto", // Ensure scrolling on mobile view
       // // Hide scrollbar for Chrome, Safari and Opera
       // '&::-webkit-scrollbar': {
