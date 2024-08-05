@@ -2,7 +2,7 @@
 const public_url = process.env.PUBLIC_URL
 const backgroundWeatherImages = {
     Clear: public_url + '/images/clear1.jpg',
-    Clouds: public_url + '/images/cloudy.jpg',
+    Clouds: public_url + '/images/cloudy1.jpg',
     Rain: public_url + '/images/rainy.jpg',
     Snow: public_url + '/images/snowy.jpg',
     Thunderstorm: public_url + '/images/thunderstorm.jpg',

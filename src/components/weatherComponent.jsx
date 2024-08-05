@@ -76,6 +76,9 @@ const Weather = () => {
                 display: "flex",
                 justifyContent: "center",
                 mt: 2,
+                position: "sticky",
+                top: 50,
+                zIndex: 1000,
               }}
             >
               <SearchBar

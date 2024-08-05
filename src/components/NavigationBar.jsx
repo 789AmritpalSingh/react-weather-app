@@ -6,12 +6,14 @@ import { Link } from 'react-router-dom';
 const NavigationBar = () => {
   return (
     <AppBar
-      position="static" // Fixes the position of the AppBar at the top of the viewport
+      position="sticky" // Fixes the position of the AppBar at the top of the viewport
       sx={{
         backgroundColor: '#1e1e1e', // Sets the background color of the AppBar
         color: '#fff', // Sets the text color of the AppBar
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', // Adds a subtle shadow below the AppBar
         borderBottom: '2px solid #333', // Adds a bottom border to the AppBar
+        top: 0,
+        zIndex: 1100,
       }}
     >
       <Toolbar>
