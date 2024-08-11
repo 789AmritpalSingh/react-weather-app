@@ -66,7 +66,6 @@ const Weather = () => {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          minHeight="100vh"
           flexDirection="column"
         >
           {isMobile && (
@@ -75,7 +74,6 @@ const Weather = () => {
                 width: "100%",
                 display: "flex",
                 justifyContent: "center",
-                mt: 2,
                 position: "sticky",
                 top: 50,
                 zIndex: 1000,
@@ -91,7 +89,7 @@ const Weather = () => {
               />
             </Box>
           )}
-          <Container maxWidth="lg">
+          <Container maxWidth="lg" sx={{marginTop: isMobile ? "35px" : "70px"}}>
             <Grid container spacing={2} direction={isMobile ? "column" : "row"}>
               <Grid item xs={12} md={6}>
                 {/* Below is the left side card displaying weather data */}

@@ -49,7 +49,8 @@ const ForecastWeatherDetails = ({
       ></div> */}
 
       {/* Grid container for city name and search bar */}
-      <Grid container justifyContent="space-between" alignItems="center" spacing={2}>
+      <Grid container justifyContent="space-between" alignItems="center" spacing={1}
+      sx={{position: "sticky", top: 70, zIndex: 1100}}>
         {forecastWeatherData && forecastWeatherData.city && (
           <Grid item>
             {/* Display city name and country */}
@@ -59,12 +60,11 @@ const ForecastWeatherDetails = ({
                 color: "#fff",
                 fontWeight: "bold",
                 textShadow: "2px 2px 4px rgba(0, 0, 0, 0.7)",
-                padding: "10px 20px",
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                padding: isMobile ? "0px 0px" : "10px 20px",
+                backgroundColor: "rgba(0, 0, 0, 0.8)",
                 borderRadius: "10px",
-                margin: "10px",
+                marginLeft: "23px",
                 zIndex: 2,
-                textAlign: isMobile ? "left" : "center"
               }}
             >
               {forecastWeatherData.city.name}, {forecastWeatherData.city.country}
@@ -73,7 +73,7 @@ const ForecastWeatherDetails = ({
         )}
         
         {/* Search bar for searching different locations */}
-        <Grid item xs={12} sm={6} md = {6} lg={6} container justifyContent={isMobile ? "flex-start" : "flex-end"}>
+        <Grid item xs={12} sm={6} md = {6} lg={6} container justifyContent={isMobile ? "flex-start" : "flex-end"} sx={{marginBottom: "10px"}}>
           <SearchBar
             options={options}
             handleInputChange={handleInputChange}
@@ -86,7 +86,7 @@ const ForecastWeatherDetails = ({
       </Grid>
 
       {/* Grid container for displaying forecast data */}
-      <Grid container spacing={2} sx={{ marginTop: "20px", zIndex: 2 }}>
+      <Grid container spacing={2} sx={{ marginTop: "50px", zIndex: 2 }}>
         {forecastWeatherData &&
           forecastWeatherData.list &&
           forecastWeatherData.list.map((hour, index) => (
@@ -94,7 +94,7 @@ const ForecastWeatherDetails = ({
               {/* Card for each forecast item */}
               <Card
                 sx={{
-                  backgroundColor: "rgba(0, 0, 0, 0.9)",
+                  backgroundColor: "rgba(0, 0, 0, 0.7)",
                   color: "#fff",
                   borderRadius: 2,
                   padding: "10px",

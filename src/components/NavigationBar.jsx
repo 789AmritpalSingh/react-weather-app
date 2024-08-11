@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const NavigationBar = () => {
   return (
     <AppBar
-      position="sticky" // Fixes the position of the AppBar at the top of the viewport
+      position="fixed" // Fixes the position of the AppBar at the top of the viewport
       sx={{
         backgroundColor: '#1e1e1e', // Sets the background color of the AppBar
         color: '#fff', // Sets the text color of the AppBar
